@@ -3,14 +3,14 @@ import { Injectable } from '@nestjs/common';
 import slugify from 'slugify';
 
 import { PrismaService } from './../database/prisma/prisma.service';
-import { Product } from '../http/graphql/models/products';
+import { Product } from '../http/graphql/models/product';
 
 interface CreateProductParams {
   title: string;
 }
 
 @Injectable()
-export class ProductService {
+export class ProductsService {
   constructor(private prisma: PrismaService) {}
 
   listAllProducts() {
@@ -42,5 +42,13 @@ export class ProductService {
     });
 
     return product;
+  }
+
+  getProductById(id: string) {
+    return this.prisma.product.findUnique({
+      where: {
+        id,
+      },
+    });
   }
 }

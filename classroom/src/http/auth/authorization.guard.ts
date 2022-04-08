@@ -1,3 +1,4 @@
+import { GqlExecutionContext } from '@nestjs/graphql';
 import {
   CanActivate,
   ExecutionContext,
@@ -8,7 +9,6 @@ import { ConfigService } from '@nestjs/config';
 import { expressJwtSecret } from 'jwks-rsa';
 import { promisify } from 'node:util';
 import jwt from 'express-jwt';
-import { GqlExecutionContext } from '@nestjs/graphql';
 
 // Middleware (Express)
 // nest generate guard authorization --no-spec

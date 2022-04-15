@@ -4,6 +4,7 @@ import slugify from 'slugify';
 import { PrismaService } from '../database/prisma/prisma.service';
 
 interface CreateCourseParams {
+  slug?: string;
   title: string;
 }
 
@@ -23,9 +24,10 @@ export class CoursesService {
     });
   }
 
-  async createCourse({ title }: CreateCourseParams) {
-    const slug = slugify(title, { lower: true });
-
+  async createCourse({
+    title,
+    slug = slugify(title, { lower: true }),
+  }: CreateCourseParams) {
     const courseAlreadyExists = await this.getCourseBySlug(slug);
 
     if (courseAlreadyExists) {
